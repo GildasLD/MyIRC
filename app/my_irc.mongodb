@@ -1,0 +1,52 @@
+use my_irc;
+
+db.getCollection("users").drop();
+db.createCollection("users", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+       properties: {
+        id: {
+           description: "must be an integer and is required",
+        },
+        _id: {
+           description: "must be a string in and isn't required",
+        },
+        login: {
+           description: "must be a string and is required",
+
+        },
+        email: {
+           description: "must be a string and match regex pattern",
+        },
+        password: {
+           description: "must be an string and is required",
+        },
+        type: {
+           description: "must be a boolean",
+        },
+        connected: {
+           description: "must be a boolean",
+        },
+        token: {
+           description: "must be a string",
+        },
+        createdAt: {
+           description: "default : now()",
+        },
+      },
+    },
+  },
+});
+
+db.users.insertOne({
+  _id: ("628a6065864a3cdc045d46a1"),
+  id: 1111112,
+  login: "Gildas",
+  email: "gildasLD@gmail.com",
+  password: "password",
+  type: true,
+  token:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdpbGRhc0xEQGVwaXRlY2guZXUiLCJpYXQiOjE2NTMyMzU4MzUsImV4cCI6MTY1MzM4NzAzNX0.61kgtc7mchplAL5vNPwiusxSWKyrd3kkAKdYsID1p1c",
+});
+
